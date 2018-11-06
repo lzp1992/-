@@ -1,6 +1,56 @@
-[{000214A0-0000-0000-C000-000000000046}]
-Prop3=19,2
-[InternetShortcut]
-URL=http://www.jq22.com/
-IDList=
-HotKey=0
+用法
+首先创建一个canvas
+
+1
+2
+3
+<canvas id="myCanvas" width="600" height="600">
+   当前浏览器版本过低，请使用其他浏览器尝试
+</canvas>
+
+再引入jquery和插件js
+
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/assets/myPlugin/turntable/turntable.js"></script>
+
+定义转盘参数及初始化
+
+
+// 定义转盘奖品
+var wheelSurf = $('#myCanvas').WheelSurf({
+    list: list, // 奖品 列表，(必填)
+    outerCircle: {
+        color: '#df1e15' // 外圈颜色(可选)
+    },
+    innerCircle: {
+        color: '#f4ad26' // 里圈颜色(可选)
+    },
+    dots: ['#fbf0a9', '#fbb936'], // 装饰点颜色(可选)
+    disk: ['#ffb933', '#ffe8b5', '#ffb933', '#ffd57c', '#ffb933', '#ffe8b5', '#ffd57c'], //中心奖盘的颜色，默认7彩(可选)
+    title: {
+        color: '#5c1e08',
+        font: '19px Arial'
+    } // 奖品标题样式(可选)
+})
+
+
+// 初始化转盘
+wheelSurf.init()
+
+
+关键方法旋转转盘
+// 转盘抽奖，
+wheelSurf.lottery(旋转角度, function () {
+})
+
+
+
+
+注意
+因为无法得知获取奖品接口的格式及抽中奖品返回的格式，
+
+1.本插件只提供初始化转盘和旋转转盘的接口。
+
+2.需要按照demo 格式化成指定参数格式，才能正确初始化转盘
+
+3.需要手写一点逻辑计算旋转角度 （顺时针数第几个奖品*360/奖品数量+（360/奖品数量）/2）
